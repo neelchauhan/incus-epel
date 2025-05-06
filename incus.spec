@@ -459,6 +459,9 @@ export CGO_LDFLAGS_ALLOW="(-Wl,-wrap,pthread_create)|(-Wl,-z,now)"
 %endif
 
 %changelog
+* Mon May 05 2025 Reto Gantenbein <reto.gantenbein@linuxmonk.ch> - 6.12-1
+- Update to incus-6.12
+
 * Fri Jan 17 2025 Fedora Release Engineering <releng@fedoraproject.org> - 6.8-2
 - Rebuilt for https://fedoraproject.org/wiki/Fedora_42_Mass_Rebuild
 
