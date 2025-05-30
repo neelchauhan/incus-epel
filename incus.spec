@@ -456,7 +456,7 @@ export CGO_LDFLAGS_ALLOW="(-Wl,-wrap,pthread_create)|(-Wl,-z,now)"
 %endif
 
 %changelog
-* Fri May 30 2025 Robby Callicotte <rcallicotte@fedoraproject.org> - 6.13.0-1
+* Fri May 30 2025 Robby Callicotte <rcallicotte@fedoraproject.org> - 6.13-1
 - Updated to incus-6.13
 
 * Mon May 05 2025 Reto Gantenbein <reto.gantenbein@linuxmonk.ch> - 6.12-1
