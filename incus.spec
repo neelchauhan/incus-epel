@@ -19,8 +19,10 @@ Version:        6.18
 
 
 # Set build macro for static builds
+%define gocompilerflags_static -compiler gc
+%define gobuild_baseflags_static %{gocompilerflags_static} -tags="rpm_crashtraceback ${GO_BUILDTAGS-${BUILDTAGS-}}" -a -v
 %define gobuild_ldflags_static ${GO_LDFLAGS-${LDFLAGS-}} %{?currentgoldflags} -B 0x$(echo "%{name}-%{version}-%{release}-${SOURCE_DATE_EPOCH:-}" | sha1sum | cut -d ' ' -f1) -compressdwarf=false
-%define gobuildflags_static() %{expand:%{gobuild_baseflags} -ldflags "%{gobuild_ldflags_static}"}
+%define gobuildflags_static() %{expand:%{gobuild_baseflags_static} -ldflags "%{gobuild_ldflags_static}"}
 %define gobuild_static(-) %{expand:
   %{?gobuilddir:GOPATH="%{gobuilddir}:${GOPATH:+${GOPATH}:}%{?gopath}"} %{?gomodulesmode} \\
   CGO_ENABLED=0 go build %{gobuildflags_static} %{?**};
