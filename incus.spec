@@ -10,7 +10,7 @@
 
 # https://github.com/lxc/incus
 %global goipath github.com/lxc/incus
-Version:        6.19.1
+Version:        6.23
 
 %gometa
 
@@ -30,7 +30,7 @@ Version:        6.19.1
 
 
 Name:           incus
-Release:        4%{?dist}
+Release:        1%{?dist}
 Summary:        Powerful system container and virtual machine manager
 License:        Apache-2.0
 URL:            https://linuxcontainers.org/incus
@@ -64,13 +64,14 @@ Source202:      %{swaggerui_source_baseurl}/swagger-ui-standalone-preset.js#/swa
 Source203:      %{swaggerui_source_baseurl}/swagger-ui.css#/swagger-ui-%{swaggerui_version}.css
 
 # Patches upstream or proposed upstream
+## https://github.com/lxc/incus/pull/3114
+Patch1001:      incus-6.23-incusd-Fix-bad-type-in-format-strings.patch
 
 # Downstream only patches
 ## Allow offline builds
 Patch1002:      incus-0.2-doc-Remove-downloads-from-sphinx-build.patch
 
 %global bashcompletiondir %(pkg-config --variable=completionsdir bash-completion 2>/dev/null || :)
-%global selinuxtype targeted
 
 BuildRequires:  gettext
 BuildRequires:  glibc-static
@@ -382,9 +383,6 @@ install -D -m0644 -vp %{SOURCE107} %{buildroot}%{_tmpfilesdir}/%{name}.conf
 install -D -m0644 -vp %{SOURCE108} %{buildroot}%{_sysconfdir}/dnsmasq.d/%{name}.conf
 install -D -m0644 -vp %{SOURCE109} %{buildroot}%{_sysctldir}/10-incus-inotify.conf
 
-# selinux policy
-install -D -m0644 -vp selinux/%{name}.pp.bz2 %{buildroot}%{_datadir}/selinux/packages/%{selinuxtype}/%{name}.pp.bz2
-
 # install helper libs
 install -d %{buildroot}%{_libexecdir}/%{name}
 install -m0755 -vp %{SOURCE110} %{buildroot}%{_libexecdir}/%{name}/
@@ -423,6 +421,9 @@ export CGO_LDFLAGS_ALLOW="(-Wl,-wrap,pthread_create)|(-Wl,-z,now)"
 %endif
 
 %changelog
+* Mon Apr 06 2026 Reto Gantenbein <reto.gantenbein@linuxmonk.ch> - 6.23-1
+- Update to 6.23
+
 * Mon Mar 30 2026 Neal Gompa <ngompa@fedoraproject.org> - 6.19.1-4
 - Drop selinux subpackage in favor of container-selinux
 
