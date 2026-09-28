@@ -31,7 +31,7 @@ Version:        7.0.0
 
 
 Name:           incus
-Release:        1%{?dist}
+Release:        2%{?dist}
 Summary:        Powerful system container and virtual machine manager
 License:        Apache-2.0
 URL:            https://linuxcontainers.org/incus
@@ -63,6 +63,10 @@ Source110:      shutdown
 Source201:      %{swaggerui_source_baseurl}/swagger-ui-bundle.js#/swagger-ui-%{swaggerui_version}-bundle.js
 Source202:      %{swaggerui_source_baseurl}/swagger-ui-standalone-preset.js#/swagger-ui-%{swaggerui_version}-standalone-preset.js
 Source203:      %{swaggerui_source_baseurl}/swagger-ui.css#/swagger-ui-%{swaggerui_version}.css
+
+# Upstream fix dd5f6d3880fefffdd2e24f9bfd51e6c209826812
+# generate-database: Fix test on Go 1.27
+Patch0001:      incus-7.0.0-fix-db-test.patch
 
 # Downstream only patches
 ## Allow offline builds
@@ -420,6 +424,9 @@ export CGO_LDFLAGS_ALLOW="(-Wl,-wrap,pthread_create)|(-Wl,-z,now)"
 %endif
 
 %changelog
+* Sun Sep 27 2026 Diego Herrera <dherrera@fedoraproject.org> - 7.0.0-2
+- Backport upstream patch to fix tests
+
 * Sat May 02 2026 Fabian Mettler <fabian@mettler.cc> - 7.0.0-1
 - Update to 7.0.0
 
