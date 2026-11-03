@@ -72,6 +72,10 @@ Patch0001:      incus-7.0.0-fix-db-test.patch
 ## Allow offline builds
 Patch1002:      incus-0.2-doc-Remove-downloads-from-sphinx-build.patch
 
+# Neel's patches
+## Allow EPEL build for Incus 7
+Patch2000:	nc-incus-7.0.0-fix-epel-build.patch
+
 %global bashcompletiondir %(pkg-config --variable=completionsdir bash-completion 2>/dev/null || :)
 
 BuildRequires:  gettext
